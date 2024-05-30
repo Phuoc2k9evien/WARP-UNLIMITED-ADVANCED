@@ -1,0 +1,34 @@
+name: Install and Run WARP-UNLIMITED-ADVANCED on Linux
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git pip
+
+      - name: Clone repository
+        run: git clone https://github.com/TheCaduceus/WARP-UNLIMITED-ADVANCED.git
+
+      - name: CD repo
+        run: cd WARP-UNLIMITED-ADVANCED
+
+      - name: Install requirements
+        run: pip install -r WARP-UNLIMITED-ADVANCED/requirements.txt
+
+      - name: Run the program
+        run: python WARP-UNLIMITED-ADVANCED/warp-plus.py
